@@ -15,24 +15,24 @@ func GetFloats(fileName string)([]float64, error) {
 
     file, err := os.Open(fileName)
     if err != nil {
-        return numbers, err
+        return nil, err
     }
 
     scanner := bufio.NewScanner(file)
     for scanner.Scan() { //read a line from the file, return true if could read, otherwise false
         numberToAdd, err := strconv.ParseFloat(scanner.Text(), 64)
         if err != nil {
-            return numbers, err
+            return nil, err
         }
         numbers = append(numbers, numberToAdd)
     }
     err = file.Close()
     if err != nil {
-        return numbers, err
+        return nil, err
     }
 
     if scanner.Err() != nil {//if there is an error scanning the file
-        return numbers, scanner.Err()
+        return nil, scanner.Err()
     }
 
     return numbers, nil
@@ -47,10 +47,17 @@ func main() {
 
     var sum float64 = 0
 
-    for _,number := range numbers {
-        sum += number
+
+    if  len(numbers) == 0 {
+        fmt.Println("No one number read from the file ")
+    } else {
+        for _,number := range numbers {
+            sum += number
+        }
+
+        sampleCount := float64(len(numbers))
+
+        fmt.Printf("Average   %.2f \n and sampleCount  %.2f", sum/sampleCount, sampleCount)
     }
 
-    sampleCount := float64(len(numbers))
-    fmt.Printf("Average   %.2f \n and sampleCount  %.2f", sum/sampleCount, sampleCount)
 }

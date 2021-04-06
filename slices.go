@@ -22,4 +22,15 @@ func main() {
     myslice := make([]string, 5) //with this literal I don't have to worry about working with elements from the underlying original array
 
     fmt.Println(myslice)
+
+    var stringSlice []string
+    fmt.Printf("1. slide %#v \n", stringSlice)
+    fmt.Println(len(stringSlice))
+    stringSlice = append(stringSlice, "")
+    fmt.Printf("2. slide %#v  \n", stringSlice)
+    fmt.Println(len(stringSlice))
+    stringSlice = append(stringSlice, "Mario Araoz")
+    fmt.Printf("3. slide %#v  \n", stringSlice)
+    fmt.Println(len(stringSlice))
+
 }
